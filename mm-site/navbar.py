@@ -16,8 +16,7 @@ def Navbar():
         ],
         brand = "William Masse",
         brand_href="#",
-        color="primary",
-        dark=True
+        dark=False
     )
 
     return navbar
