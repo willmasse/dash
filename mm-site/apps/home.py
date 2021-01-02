@@ -28,7 +28,7 @@ jumbotron = dbc.Jumbotron(
             fluid=True,
         )
     ],
-    className="m-3"
+    className="m-4"
 )
 
 cards = html.Div([
@@ -48,7 +48,7 @@ cards = html.Div([
         ),
         style={"width": "18rem"},
     )
-], className="m-3")
+], className="m-4")
 
 
 body = html.Div([

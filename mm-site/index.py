@@ -5,6 +5,8 @@ from dash.dependencies import Input, Output
 from app import app
 from apps import app1, home
 
+app.title="William Masse"
+
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
