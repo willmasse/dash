@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app
-from apps import app1, home
+from apps import mm_21_1, home
 
 app.title="William Masse"
 
@@ -15,8 +15,8 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
             Input('url', 'pathname'))
 def display_page(pathname):
-    if pathname =="/app1":
-        return app1.layout
+    if pathname =="/mm/2021-w1":
+        return mm_21_1.layout
     else:
         return home.layout
 
