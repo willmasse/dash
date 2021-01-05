@@ -11,7 +11,7 @@ import plotly.express as px
 from app import app
 from navbar import Navbar
 
-df = pd.read_excel('assets/RailsToTrails_National Count Data_week.xlsx')
+df = pd.read_excel("https://query.data.world/s/uokilbtzasdjes5m6kvboiijuttqsk")
 df = df.dropna(axis=0, subset=["Week"])
 df["Year"] = df['Year'].astype('int').astype("str")
 df["Bike Week"] = df["Bikes (14 counters)"] > df["Pedestrians (14 counters)"]
