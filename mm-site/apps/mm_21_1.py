@@ -46,35 +46,35 @@ fig_2_text = html.Div([
     dbc.Button(
         html.Div([
             html.H5("Walkers outnumber bikers..."),
-            html.P("In 58 weeks out of the 92 observed walkers outnumbered bikers.")
+            html.P("In 58 weeks out of the 92 weeks observed walkers outnumbered bikers.")
         ]),
-        id="button-1", className="mb-2 mr-3 mt-3"),
+        id="button-1", className="mb-2 mr-3 mt-3", color="light"),
     dbc.Button(
         html.Div([
             html.H5("In 2019.."),
-            html.P("In 2019 bikers only outnumberd walkers on 13 out of the 46 weeks observed.")
+            html.P("In 2019 bikers only outnumbered walkers on 13 out of the 46 weeks observed. Walkers seemed to own the trails.")
         ]),
-        id="button-2", className="mt-2 mr-3"),
+        id="button-2", className="mt-2 mr-3", color="light"),
     dbc.Button(
         html.Div([
-            html.H5("In 2020 bikers are catching up!"),
-            html.P("In 2020 bikers outnumbered walkers in 21 out of the 46 weeks observed.")
+            html.H5("But...In 2020 bikers are catching up!"),
+            html.P("In 2020 bikers outnumbered walkers in 21 out of the 46 weeks observed. Seems like bikers are getting a bit more common!")
         ]),
-        id="button-3", className="mt-3 mr-3"
+        id="button-3", className="mt-3 mr-3", color="light"
     )
 ])
 
 
 nav = Navbar()
 
-body = html.Div([
+body = dbc.Container([
     dbc.Row([
-        dbc.Col(width=6),
-        dbc.Col(
-            dcc.Graph(figure=fig, id="line-chart"),
-            width=6
-        ),
-    ]),
+        html.H3("Who owns the trails?"),
+        html.P(children=[
+            html.Span("Rails-to-Trails Conservancy (RTC), a non-profit organization dedicated to making more multi-use walking and biking paths, conducts weekly analysis of their national trail usage. 31 counters hit the trails to count the number of pedestrians and bikers on their trails each week. In an attempt to visualize the impacts of the COVID-19 pandemic on trail-use we compared the ratios of bikers to walkers over the past two years on RTC trails. Check out the visualization below, and "),
+            html.Strong("click on our key findings to see them higlighted in the chart!")
+        ])
+    ], className="justify-content-center m-3"),
     dbc.Row([
         dbc.Col(
             dcc.Graph(id="graph2", config={
@@ -83,6 +83,11 @@ body = html.Div([
             width=8),
         dbc.Col(fig_2_text,width=4)
     ], className="mt-4"),
+
+    dbc.Row([
+    html.Em(children=["Visualization by William Masse, Data from ", 
+    html.A("Rails to Trails Conservancy", href="https://www.railstotrails.org/about/")])
+    ], className="mb-4")
     
 
 ])

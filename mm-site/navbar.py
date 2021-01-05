@@ -5,7 +5,7 @@ def Navbar():
         children = [
             dbc.DropdownMenu(
                 children=[
-                    dbc.DropdownMenuItem("2021-W1", href="#"),
+                    dbc.DropdownMenuItem("2021-W1", href="/mm/2021-w1"),
                     dbc.DropdownMenuItem("2021-W2", href="#")
                 ],
                 nav=True,
