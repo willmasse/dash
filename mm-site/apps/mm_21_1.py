@@ -27,7 +27,7 @@ def about_func(row):
     if row["Bikes (14 counters)"] >= row["Pedestrians (14 counters)"]:
         return "Bikers outnumbered Walkers " + str(round(row['Bikes (14 counters)']/row['Pedestrians (14 counters)'], 2)) + " to 1."
     elif row["Bikes (14 counters)"] < row["Pedestrians (14 counters)"]:
-        return "Bikers outnumbered Walkers " + str(round(row['Pedestrians (14 counters)']/row['Bikes (14 counters)'], 2)) + " to 1."
+        return "Walkers outnumbered Bikers " + str(round(row['Pedestrians (14 counters)']/row['Bikes (14 counters)'], 2)) + " to 1."
     else:
         return "None"
 
