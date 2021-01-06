@@ -43,6 +43,8 @@ fig = px.line(df, x="Timeframe", y="Counts (31 counters)", color="Year", labels 
 
 
 fig_2_text = html.Div([
+    html.H4("Key Findings"),
+    html.P(html.Em("Click on our findings to see them highlighted in the chart.")),
     dbc.Button(
         html.Div([
             html.H5("Walkers outnumber bikers..."),
@@ -74,7 +76,14 @@ body = dbc.Container([
             html.Span("Rails-to-Trails Conservancy (RTC), a non-profit organization dedicated to making more multi-use walking and biking paths, conducts weekly analysis of their national trail usage. 31 counters hit the trails to count the number of pedestrians and bikers on their trails each week. In an attempt to visualize the impacts of the COVID-19 pandemic on trail-use we compared the ratios of bikers to walkers over the past two years on RTC trails. Check out the visualization below, and "),
             html.Strong("click on our key findings to see them higlighted in the chart!")
         ])
-    ], className="justify-content-center m-3"),
+        ], className="justify-content-center m-3"),
+    dbc.Row([
+        dbc.Col([
+            html.H6(html.Em("How to read this chart.")),
+            html.P("Points on the left side of the chart represent weeks where walkers outnumbered bikers. Points on the right side of the chart represent weeks where bikers outnumbered walkers. Hover over any data point to see the exact ratio."),
+    
+        ], width=8, className="m-3"),
+    ]),
     dbc.Row([
         dbc.Col(
             dcc.Graph(id="graph2", config={
@@ -92,18 +101,19 @@ body = dbc.Container([
 
 ])
 
-layout = html.Div([nav, body])
+layout = html.Div([nav, body],  id="body-id")
 
 @app.callback(
     Output("graph2", 'figure'),
     Input('button-1', 'n_clicks'),
     Input('button-2', "n_clicks"),
-    Input('button-3', "n_clicks")
+    Input('button-3', "n_clicks"),
+    Input('body-id', "n_clicks"),
 )
-def display(button1, button2, button3):
+def display(button1, button2, button3, body):
     ctx = dash.callback_context
 
-    fig2 = px.scatter(df, x="Ratio", y="Timeframe", color="Year", height=800, hover_data={
+    fig2 = px.scatter(df, x="Ratio", y="Timeframe", color="Year", color_discrete_map={"2019":"red", "2020":"blue"}, height=800, hover_data={
         "Year":True,
         "Timeframe":True,
         "Ratio":False,
@@ -141,7 +151,7 @@ def display(button1, button2, button3):
     fig2.update_traces(marker=dict(
     size=12,
     line=dict(
-        width=2,
+        width=1,
         color="DarkSlateGrey")),
     selector=dict(mode="markers")
     )
@@ -167,18 +177,46 @@ def display(button1, button2, button3):
             t_df = df[(df["Ratio"]>0)&(df["Year"]=="2019")]
         elif button_id == "button-3":
             t_df = df[(df["Ratio"]>0)&(df["Year"]=="2020")]
-        fig2.add_trace(px.scatter(t_df, x="Ratio", y="Timeframe", height=800, hover_data={
+        elif button_id == "body-id":
+            return fig2
+        
+        fig2.update_traces(marker=dict(
+        size=12,
+        opacity=0.4,
+        line=dict(
+            width=2,
+            color="DarkSlateGrey")),
+        selector=dict(mode="markers")
+        )
+
+        new_trace = px.scatter(t_df, x="Ratio", y="Timeframe", color="Year",color_discrete_map={"2019":"red", "2020":"blue"}, height=800, hover_data={
         "Year":True,
         "Timeframe":True,
         "Ratio":False,
         "About":True}).update_traces(marker=dict(
                 size=12,
-                color="rgba(135, 206, 250, 0)",
                 line=dict(
-                    width=4,
+                    width=1,
                     color="Black")),
                 selector=dict(mode="markers")
-                ).data[0])
+                )
+        new_trace.data[0]['showlegend']=False
+        fig2.add_trace(new_trace.data[0])
+        
+        if button_id=='button-1':
+            new_trace = px.scatter(t_df, x="Ratio", y="Timeframe", color="Year", color_discrete_map={"2019":"red", "2020":"blue"}, height=800, hover_data={
+            "Year":True,
+            "Timeframe":True,
+            "Ratio":False,
+            "About":True}).update_traces(marker=dict(
+                    size=12,
+                    line=dict(
+                        width=1,
+                        color="Black")),
+                    selector=dict(mode="markers")
+                    )
+            new_trace.data[1]['showlegend']=False
+            fig2.add_trace(new_trace.data[1])
                 
     
     return fig2

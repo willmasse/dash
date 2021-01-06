@@ -35,15 +35,13 @@ cards = html.Div([
     dbc.Card(
         dbc.CardBody(
             [
-                html.H4("Title", className="card-title"),
-                html.H6("Card subtitle", className="card-subtitle"),
+                html.H5("MM VIZ 2021 - Week 1", className="card-title"),
+                html.H6("Who owns the trails?", className="card-subtitle"),
                 html.P(
-                    "Some quick example text to build on the card title and make "
-                    "up the bulk of the card's content.",
+                    "Comparing the ratio of bikers and walkers week over week. #plotly",
                     className="card-text",
                 ),
-                dbc.CardLink("Card link", href="#"),
-                dbc.CardLink("External link", href="https://google.com"),
+                dbc.CardLink("View", href="/mm/2021-w1"),
             ]
         ),
         style={"width": "18rem"},
