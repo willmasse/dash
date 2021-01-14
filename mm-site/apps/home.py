@@ -31,21 +31,36 @@ jumbotron = dbc.Jumbotron(
     className="m-4"
 )
 
-cards = html.Div([
+cards = dbc.Row([
     dbc.Card(
         dbc.CardBody(
             [
                 html.H5("MM VIZ 2021 - Week 1", className="card-title"),
                 html.H6("Who owns the trails?", className="card-subtitle"),
                 html.P(
-                    "Comparing the ratio of bikers and walkers week over week. #plotly",
+                    "Comparing the ratio of bikers and walkers week over week. Using plotly.",
                     className="card-text",
                 ),
                 dbc.CardLink("View", href="/mm/2021-w1"),
             ]
         ),
-        style={"width": "18rem"},
-    )
+        style={"width": "18rem"}, className="m-3"
+    ),
+    dbc.Card(
+        dbc.CardBody(
+            [
+                html.H5("MM VIZ 2021 - Week 2", className="card-title"),
+                html.H6("Operation Fistula - HIV and Gender", className="card-subtitle"),
+                html.P(
+                    "Exploring the Gender Gap in HIV Infection Rate in Sub-Saharan Africa. Using streamlit.",
+                    className="card-text",
+                ),
+                dbc.CardLink("View", href="/mm/2021-w2"),
+            ]
+        ),
+        style={"width": "18rem"}, className="m-3"
+    ),
+
 ], className="m-4")
 
 
