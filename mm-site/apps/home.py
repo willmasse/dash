@@ -6,6 +6,12 @@ from navbar import Navbar
 
 nav = Navbar()
 
+social = dbc.Row([
+    dbc.Col([html.A(html.I(className="fab fa-linkedin fa-4x"),href="https://www.linkedin.com/in/willmasse/"),html.Br(),html.P("LinkedIn", className='lead')],className="text-center"),
+    dbc.Col([html.A(html.I(className="fab fa-medium fa-4x"), href="https://willmasse.medium.com/"),html.Br(), html.P("Medium", className='lead')],className="text-center"),
+    dbc.Col([html.A(html.I(className="fab fa-twitter-square fa-4x"), href="https://twitter.com/willmasse2"),html.Br(), html.P("Twitter", className='lead')],className="text-center")
+], className="justify-content-center mt-3")
+
 jumbotron = dbc.Jumbotron(
     [
         dbc.Container(
@@ -17,19 +23,28 @@ jumbotron = dbc.Jumbotron(
                         html.P(
                             "My name is William Masse. I'm a Data Analyst whose passion is transforming data into interactive and compelling visulizations.",
                             className="lead"),
-                        dbc.Row([
-                            html.A(html.I(className="fab fa-linkedin fa-4x"),href="https://www.linkedin.com/in/willmasse/"),
-                            html.A(html.I(className="fab fa-medium fa-4x"), href="https://willmasse.medium.com/"),
-                            html.A(html.I(className="fab fa-twitter-square fa-4x"), href="https://twitter.com/willmasse2"),
-                        ], className="justify-content-around")
+                        html.Div([
+                            dbc.Badge("Python", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("R", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("SQL", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("Web (HTML, CSS, Javascript)", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("Django", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("Visualization (Matplotlib, Altair, Highcharts)", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("Plotly/Dash", pill=True, color="secondary", className="m-2"),
+                            dbc.Badge("Tableau", pill=True, color="secondary", className="m-2"),
+                        ]),
                     ]),
-                ])
+                ]),
             ],
             fluid=True,
-        )
+        ),
+        html.Hr(),
+        social
     ],
-    className="m-4"
+    className="m-4", id="my_jumbo"
 )
+
+
 
 cards = dbc.Row([
     dbc.Card(
@@ -64,7 +79,7 @@ cards = dbc.Row([
 ], className="m-4")
 
 
-body = html.Div([
+body = dbc.Container([
     jumbotron,
     cards
 ])
